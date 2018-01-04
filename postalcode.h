@@ -16,11 +16,16 @@ typedef struct {
 	char town[256];
 } address;
 
-typedef struct {
+typedef struct postal_data {
 	uint32_t postal_code;
 	address kana;
 	address kanji;
 } postal_data;
+
+typedef struct postal_list {
+	postal_data *data;
+	struct postal_list *next;
+} postal_list;
 
 /* 郵便番号データを切り出し */
 int split_jppost(char *p, postal_data *d);
@@ -29,6 +34,7 @@ int split_jppost(char *p, postal_data *d);
 int del_quote(char **p);
 
 /* データを画面に表示 */
-void print_postal(const postal_data *p);
+//void print_postal(const postal_data *p);
+void print_postal(const postal_list *p);
 
 #endif /* _POSTTALCODE_H_ */
