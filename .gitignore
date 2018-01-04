@@ -2,3 +2,4 @@ postalcode
 *.o
 *~
 *.swp
+tags
