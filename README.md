@@ -1,66 +1,37 @@
-—X•Ö”Ô†ƒf[ƒ^iCSVj‚©‚ç“Á’è‚Ì€–Ú‚ðŽæ‚èo‚µAÅ‘åƒoƒCƒg”‚ðŽæ“¾‚·‚éB
+# éƒµä¾¿ç•ªå·æ¤œç´¢ã®ç·´ç¿’
+éƒµä¾¿ç•ªå·ãƒ‡ãƒ¼ã‚¿ï¼ˆCSVï¼‰ã‹ã‚‰ç‰¹å®šã®é …ç›®ã‚’å–ã‚Šå‡ºã—ã€æœ€å¤§ãƒã‚¤ãƒˆæ•°ã‚’å–å¾—ã™ã‚‹ã€‚
 
-Linux‚ÍUTF-8‚È‚Ì‚Å•¶ŽšƒR[ƒh‚ðShift JIS‚©‚ç•ÏX‚·‚éB
-# nkf -w -Lu --overwrite 08IBARAK.csv
+ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ‡ãƒ¼ã‚¿ã¯Shift JISãªã®ã§UTF-8ã«å¤‰æ›´ã™ã‚‹ã€‚
+```# nkf -w -Lu --overwrite 08IBARAK.csv
 
-—á@ƒ‹ƒr‚ÌŽs–¼‚ÌÅ‘åƒoƒCƒg”‚ðŽæ“¾‚·‚éB
-‘OŒã‚Ìƒ_ƒuƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“(2ƒoƒCƒgj‚Æ‰üs•¶Žš‚ðŠÜ‚Þ
+## å„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æœ€å¤§ãƒã‚¤ãƒˆæ•°ãŒåˆ†ã‹ã‚‰ãªã„ãŸã‚ç¢ºèªã™ã‚‹ã€‚
+ã‚«ãƒŠã®å¸‚åã®æœ€å¤§ãƒã‚¤ãƒˆæ•°ã‚’å–å¾—ã™ã‚‹ã€‚
+å‰å¾Œã®ãƒ€ãƒ–ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³(2ãƒã‚¤ãƒˆï¼‰ã¨æ”¹è¡Œæ–‡å­—ã‚’å«ã‚€
 
-$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo $line | wc -c ; done > result.txt
-$ sort -r resltl.txt | head
+```$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo $line | wc -c ; done > result.txt
+```$ sort -r resltl.txt | head
 
-‰üs•¶Žš‚ðŠÜ‚Ü‚È‚¢ê‡‚Í
+æ”¹è¡Œæ–‡å­—ã‚’å«ã¾ãªã„å ´åˆã¯
 
-$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo -n $line | wc -c ; done > result.txt
-$ sort -r result.txt | head
+```$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo -n $line | wc -c ; done > result.txt
+```$ sort -r result.txt | head
 
-‰‚ß‚ÌŠm”F‚Í
-# head -2
-# head -2 | cut -f 5 -d ","
-
-wc‚ÌŠm”F
-# head -1 | cut -f 5 -d "," | wc -c
-‚±‚ê‚¾‚Æs‚²‚Æ‚Å‚Í‚È‚­Aƒg[ƒ^ƒ‹‚ÌƒoƒCƒg”‚ð•\Ž¦‚µ‚Ä‚µ‚Ü‚¤‚Ì‚ÅA
-
-1s‚¸‚Âˆ—‚·‚é‚½‚ß‚É‚ÍƒVƒFƒ‹ƒXƒNƒŠƒvƒg‚Ì—Í‚ðŽØ‚è‚éB
-
-while•¶‚ÌŠm”F
-ƒƒ“ƒ‰ƒCƒi[
-# while read line; do echo $line; done <<EOF
-
-ƒCƒ“ƒ^ƒ‰ƒNƒeƒBƒu
-# while read line
-> do
-> echo $line
-> done <<EOF
-> polytech
-> center
->EOF
-polytechcenter#
-
-Œ‹˜_
-ƒ‹ƒr‚ÌŽs–¼‚ÌÅ‘åƒoƒCƒg”i—¼˜e‚Ìƒ_ƒuƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“‚ðŠÜ‚ÝA‰üs‚ÍŠÜ‚Ü‚È‚¢j‚ÍA50ƒoƒCƒg‚Å‚ ‚é‚±‚Æ‚ª•ª‚©‚éB
+çµè«–
+ãƒ«ãƒ“ã®å¸‚åã®æœ€å¤§ãƒã‚¤ãƒˆæ•°ï¼ˆä¸¡è„‡ã®ãƒ€ãƒ–ãƒ«ã‚¯ã‚©ãƒ¼ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å«ã¿ã€æ”¹è¡Œã¯å«ã¾ãªã„ï¼‰ã¯ã€50ãƒã‚¤ãƒˆã§ã‚ã‚‹ã“ã¨ãŒåˆ†ã‹ã‚‹ã€‚
 
 ---------------------
-d•¡‚µ‚½s‚ðŽæ‚èœ‚­
+## é‡è¤‡ã—ãŸè¡Œã‚’å–ã‚Šé™¤ã
 
-# head -1000 08IBARAK.CSV | sort -t, -k5,5d -u
-Žq‚ÌƒRƒ}ƒ“ƒh‚¾‚ÆAŽs–¼‚Ìd•¡s‚Ìæ“ª‚Í‘S‚ÄuƒCƒJƒjƒPƒCƒTƒCƒKƒiƒCƒoƒAƒCv‚É‚È‚é‚½‚ßA‚±‚Ìs‚ðíœ‚µ‚½ƒf[ƒ^‚©‚çd•¡s‚ðíœ‚·‚éB
+```# head -1000 08IBARAK.CSV | sort -t, -k5,5d -u
+ã“ã®ã‚³ãƒžãƒ³ãƒ‰ã ã¨ã€å¸‚åã®é‡è¤‡è¡Œã®å…ˆé ­ã¯å…¨ã¦ã€Œã‚¤ã‚«ãƒ‹ã‚±ã‚¤ã‚µã‚¤ã‚¬ãƒŠã‚¤ãƒã‚¢ã‚¤ã€ã«ãªã‚‹ãŸã‚ã€ã“ã®è¡Œã‚’å‰Šé™¤ã—ãŸãƒ‡ãƒ¼ã‚¿ã‹ã‚‰é‡è¤‡è¡Œã‚’å‰Šé™¤ã™ã‚‹ã€‚
 
-# grep -v ƒCƒJƒjƒPƒCƒTƒCƒKƒiƒCƒoƒAƒC 08IBARAK.CSV | sort -t, -k5,5d -u
-
-----------
-í‘Žs‚Æ…ŠC“¹‚ðŠÜ‚Þs‚ð’Šo‚·‚éB
-# grep í‘Žs 08IBARAK.CSV | grep …ŠC“¹
-
------------
-”Žš‚¾‚¯‚Å\¬‚³‚êAæ“ª‚ª0‚ÅŽn‚Ü‚éƒf[ƒ^‚ðƒGƒNƒZƒ‹‚Å“Ç‚Ýž‚Þ‚Æ‚¤‚Ü‚­•\Ž¦‚ª‚Å‚«‚È‚¢B
-‚±‚Ì‚æ‚¤‚Èƒf[ƒ^‚Íæ“ª‚É'iƒVƒ“ƒOƒ‹ƒNƒH[ƒe[ƒVƒ‡ƒ“j‚ð•t‚¯‚é‚Æ‚æ‚¢H
+```# grep -v ã‚¤ã‚«ãƒ‹ã‚±ã‚¤ã‚µã‚¤ã‚¬ãƒŠã‚¤ãƒã‚¢ã‚¤ 08IBARAK.CSV | sort -t, -k5,5d -u
 
 ----------------
-—X•Ö”Ô†‚Ìƒz[ƒ€ƒy[ƒW‚É‚æ‚é‚ÆAu¦7 ‘SŠp‚Æ‚È‚Á‚Ä‚¢‚é’¬ˆæ–¼‚Ì•¶Žš”‚ª38•¶Žš‚ð’´‚¦‚éê‡A‚Ü‚½A”¼ŠpƒJƒ^ƒJƒi‚Æ‚È‚Á‚Ä‚¢‚é’¬ˆæ–¼‚ÌƒtƒŠƒKƒi‚ª76•¶Žš‚ð‰z‚¦‚éê‡‚É‚ÍA•¡”ƒŒƒR[ƒh‚É•ªŠ„‚µ‚Ä‚¢‚Ü‚·Bv‚Æ‚ ‚éB
-‚±‚Ì‚æ‚¤‚Èƒf[ƒ^‚ª‘¶Ý‚·‚é‚©Šm”F‚·‚éƒRƒ}ƒ“ƒh‚ÍH
+## TODO
+éƒµä¾¿ç•ªå·ã®ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸ã«ã‚ˆã‚‹ã¨ã€ã€Œâ€»7 å…¨è§’ã¨ãªã£ã¦ã„ã‚‹ç”ºåŸŸåã®æ–‡å­—æ•°ãŒ38æ–‡å­—ã‚’è¶…ãˆã‚‹å ´åˆã€ã¾ãŸã€åŠè§’ã‚«ã‚¿ã‚«ãƒŠã¨ãªã£ã¦ã„ã‚‹ç”ºåŸŸåã®ãƒ•ãƒªã‚¬ãƒŠãŒ76æ–‡å­—ã‚’è¶Šãˆã‚‹å ´åˆã«ã¯ã€è¤‡æ•°ãƒ¬ã‚³ãƒ¼ãƒ‰ã«åˆ†å‰²ã—ã¦ã„ã¾ã™ã€‚ã€ã¨ã‚ã‚‹ã€‚
+ã“ã®ã‚ˆã†ãªãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã™ã‚‹ã‹ç¢ºèªã™ã‚‹ã‚³ãƒžãƒ³ãƒ‰ã¯ï¼Ÿ
 
-—X•Ö”Ô†‚Å“¯‚¶ƒf[ƒ^‚ª2sˆÈã‘±‚­
-ƒf[ƒ^‚ð’T‚·H
+éƒµä¾¿ç•ªå·ã§åŒã˜ãƒ‡ãƒ¼ã‚¿ãŒ2è¡Œä»¥ä¸Šç¶šã
+ãƒ‡ãƒ¼ã‚¿ã‚’æŽ¢ã™ï¼Ÿ
 
