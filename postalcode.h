@@ -1,7 +1,7 @@
 #ifndef _POSTTALCODE_H_
 #define _POSTTALCODE_H_
 
-#include <stdint.h>
+#include "list_post.h"
 
 #define KANA_PERF_LEN	256
 #define KANA_CITY_LEN	256
@@ -9,23 +9,6 @@
 #define KANJI_PERF_LEN	256
 #define KANJI_CITY_LEN	256
 #define KANJI_TOWN_LEN	256
-
-typedef struct {
-	char perf[256];
-	char city[256];
-	char town[256];
-} address;
-
-typedef struct postal_data {
-	uint32_t postal_code;
-	address kana;
-	address kanji;
-} postal_data;
-
-typedef struct postal_list {
-	postal_data *data;
-	struct postal_list *next;
-} postal_list;
 
 /* 郵便番号データを切り出し */
 int split_jppost(char *p, postal_data *d);

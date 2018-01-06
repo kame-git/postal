@@ -1,37 +1,27 @@
 # 郵便番号検索の練習
 郵便番号データ（CSV）から特定の項目を取り出し、最大バイト数を取得する。
-
-オリジナルデータはShift JISなのでUTF-8に変更する。
-```# nkf -w -Lu --overwrite 08IBARAK.csv
-
+## オリジナルデータはShift JISなのでUTF-8に変更する。
+    # nkf -w -Lu --overwrite 08IBARAK.csv
 ## 各フィールドの最大バイト数が分からないため確認する。
 カナの市名の最大バイト数を取得する。
 前後のダブルクォーテーション(2バイト）と改行文字を含む
-
-```$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo $line | wc -c ; done > result.txt
-```$ sort -r resltl.txt | head
-
+    $ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo $line | wc -c ; done > result.txt
+    $ sort -r resltl.txt | head
 改行文字を含まない場合は
-
-```$ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo -n $line | wc -c ; done > result.txt
-```$ sort -r result.txt | head
-
-結論
+    $ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo -n $line | wc -c ; done > result.txt
+    $ sort -r result.txt | head
+## 結論
 ルビの市名の最大バイト数（両脇のダブルクォーテーションを含み、改行は含まない）は、50バイトであることが分かる。
-
 ---------------------
 ## 重複した行を取り除く
-
-```# head -1000 08IBARAK.CSV | sort -t, -k5,5d -u
+    # head -1000 08IBARAK.CSV | sort -t, -k5,5d -u
 このコマンドだと、市名の重複行の先頭は全て「イカニケイサイガナイバアイ」になるため、この行を削除したデータから重複行を削除する。
-
-```# grep -v イカニケイサイガナイバアイ 08IBARAK.CSV | sort -t, -k5,5d -u
-
+    # grep -v イカニケイサイガナイバアイ 08IBARAK.CSV | sort -t, -k5,5d -u
 ----------------
 ## TODO
-郵便番号のホームページによると、「※7 全角となっている町域名の文字数が38文字を超える場合、また、半角カタカナとなっている町域名のフリガナが76文字を越える場合には、複数レコードに分割しています。」とある。
-このようなデータが存在するか確認するコマンドは？
+郵便番号のホームページによると、  
+> 「※7 全角となっている町域名の文字数が38文字を超える場合、また、半角カタカナとなっている町域名のフリガナが76文字を越える場合には、複数レコードに分割しています。」
+このようなデータが存在するか確認するコマンドは？  
 
-郵便番号で同じデータが2行以上続く
-データを探す？
+郵便番号で同じデータが2行以上続くデータを探す？
 

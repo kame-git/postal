@@ -18,62 +18,26 @@ int main(int argc, char *argv[])
 	}
 
 	char temp[256];
-
-	/* 片方向リストとして実装する */
-	postal_list *head_node, *last_node, *new_node;
-	head_node = last_node = NULL;
+    postal_data data = {0};
 
 	while (fgets(temp, sizeof(temp), fp)) {
 		temp[strlen(temp)-1] = '\0';
 
-		postal_data *data = (postal_data*)malloc(sizeof(postal_data));
-
-		//新しいノードを作成
-		new_node = (postal_list*)malloc(sizeof(postal_list));
-		if (new_node == NULL) {
-			fprintf(stderr, "can not allocate memory for node.\n");
-			return 1;
-		}
-
-		new_node->data = data;
-	
-		if (last_node == NULL) {	 //最初のノード
-			new_node->next = NULL;
-			head_node = last_node = new_node;
-		} else {					 //リストの末尾にデータを追加
-			last_node->next = new_node;
-			last_node = new_node;
-		}
-
-		int ret = split_jppost(temp, data); 
+		int ret = split_jppost(temp, &data); 
 		if (ret < 0) {
 			fprintf(stderr, "error: split_function\n");
 			return 1;
 		}
+        
+        if (!set_post(&data)) {
+            fprintf(stderr, "can not insert postal_data.\n");
+            return 1;
+        }
 	}
 	
-	print_postal(head_node);
+    print_post_all();
 
 	return 0;
-}
-
-void print_postal(const postal_list *p)
-{
-	const postal_list *this_node = p;
-	int i = 0;
-
-	while (this_node != NULL) {
-		printf("%d\n", this_node->data->postal_code);
-		puts(this_node->data->kana.perf);
-		puts(this_node->data->kana.city);
-		puts(this_node->data->kana.town);
-		puts(this_node->data->kanji.perf);
-		puts(this_node->data->kanji.city);
-		puts(this_node->data->kanji.town);
-		puts("-----------------------------------");
-		this_node = this_node->next;
-
-	}
 }
 
 int del_quote(char **p)
