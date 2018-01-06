@@ -13,9 +13,10 @@
 
     $ cat 08IBARAK.CSV | cut -f 5 -d "," | while read line; do echo -n $line | wc -c ; done > result.txt
     $ sort -r result.txt | head
-## 結論
+## 結論  
 
 ルビの市名の最大バイト数（両脇のダブルクォーテーションを含み、改行は含まない）は、50バイトであることが分かる。
+
 ---------------------
 ## 重複した行を取り除く
 
