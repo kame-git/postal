@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS= -O0 -g -Wunused-parameter -Wall -Wextra 
+CFLAGS= -O0 -g -Wall -Wextra 
 CLIBSS=
 TARGET= postalcode
 

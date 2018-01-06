@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "list_post.h"
 
@@ -48,14 +49,31 @@ bool insert_post(const postal_data *p)
 }
 
 /* 郵便番号から該当するノードを検索 */
-postal_data *search_post(const int post)
+postal_data *search_post(const uint32_t post)
 {
+    postal_list *p = head_node;
+    while (p != NULL) {
+        if (p->data->postal_code == post) {
+            return p->data;
+        } else {
+            p = p->next;
+        }
+    }
     return NULL;
 }
 
 /* ノードを全て削除 */
 void clear_post()
 {
+    postal_list *p = head_node;
+    postal_list *t;
+
+    while (p != NULL) {
+        free(p->data);
+        t = p->next;
+        free(p);
+        p = t;
+    }
 }
 
 /* ノードの情報を全て表示 */

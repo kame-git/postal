@@ -35,9 +35,30 @@ int main(int argc, char *argv[])
         }
 	}
 	
-    print_post_all();
+    printf("検索郵便番号: ");
+    uint32_t postal_code;
+    scanf("%d", &postal_code);
+
+    postal_data *find_post = search_post(postal_code);
+    if (find_post != NULL) {
+        print_post(find_post);
+    }
+
+    /* 動的メモリはOSに回収してもらう */
+    /* clear_post(); */
 
 	return 0;
+}
+
+void print_post(const postal_data *p)
+{
+	printf("%d\n", p->postal_code);
+	puts(p->kana.perf);
+	puts(p->kana.city);
+	puts(p->kana.town);
+	puts(p->kanji.perf);
+	puts(p->kanji.city);
+	puts(p->kanji.town);
 }
 
 int del_quote(char **p)

@@ -17,7 +17,10 @@ int split_jppost(char *p, postal_data *d);
 int del_quote(char **p);
 
 /* データを画面に表示 */
-//void print_postal(const postal_data *p);
+//全ての情報を表示
 void print_postal(const postal_list *p);
+
+//1つの情報だけ表示
+void print_post(const postal_data *p);
 
 #endif /* _POSTTALCODE_H_ */

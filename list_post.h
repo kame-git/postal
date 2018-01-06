@@ -29,7 +29,7 @@ inline bool set_post(const postal_data *d);
 /* ノードをリストに追加 */
 bool insert_post(const postal_data *p);
 /* 郵便番号から該当するノードを検索 */
-postal_data *search_post(const int post);
+postal_data *search_post(const uint32_t post);
 /* ノードを全て削除 */
 void clear_post();
 
