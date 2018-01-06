@@ -20,20 +20,26 @@ int main(int argc, char *argv[])
 	char temp[256];
     postal_data data = {0};
 
+    int err_count = 0;
+    int count = 0;
 	while (fgets(temp, sizeof(temp), fp)) {
 		temp[strlen(temp)-1] = '\0';
 
 		int ret = split_jppost(temp, &data); 
 		if (ret < 0) {
-			fprintf(stderr, "error: split_function\n");
-			return 1;
-		}
+            err_count++;
+            continue;
+		} else {
+            count++;
+        }
         
         if (!set_post(&data)) {
             fprintf(stderr, "can not insert postal_data.\n");
             return 1;
         }
 	}
+
+    printf("正常に読み込んだデータ数 %d/%d\n", count - err_count, count);
 	
     printf("検索郵便番号: ");
     uint32_t postal_code;
@@ -74,61 +80,77 @@ int del_quote(char **p)
 	return 0;
 }
 
+/** @brief カンマで区切られたデータを切り分
+ *  @notice マルチバイト文字列に対してstrtokを使用しているため
+ *  特定の文字列で正常に動作しないかもしれない。
+ */
 #define FIELD_NUM 15
 int split_jppost(char *temp, postal_data *data)
 {
-	int i;
-	int ret = 0;
+    char *p;
+    int i = 0;
+    int ret = 0;
 
-	for (i = 0; i < FIELD_NUM-1; i++) {
-		/* 「,」を探して\0に置き換え */
-		char *p = strchr(temp, ',');
-		if (p == NULL) {
-			fprintf(stderr, "Invalid number of fields.\n");
-			return -1;
-		}
-		*p = '\0';
-
-
+    p = strtok(temp, ",");
+    while (p) {
+        
 		/* 文字列のコピーにstrncpyではなくstrcpyを用いている。 */
 		/* 対象文字列がマルチバイト文字コードで必要バイを求め  */
 		/* る標準ライブラリがないため。                        */
 		switch (i) {
 			case 2:		/* 郵便番号7桁 */
-				ret = del_quote(&temp);
-				data->postal_code = atoi(temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				data->postal_code = atoi(p);
 				break;
 			case 3:		/* 都道府県名（カタカナ） */
-				ret = del_quote(&temp);
-				strcpy(data->kana.perf, temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kana.perf, p);
 				break;
 			case 4:		/* 市区町村名（カタカナ） */
-				ret = del_quote(&temp);
-				strcpy(data->kana.city, temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kana.city, p);
 				break;
 			case 5:		/* 町域名（カタカナ） */
-				ret = del_quote(&temp);
-				strcpy(data->kana.town, temp); 
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kana.town, p); 
 				break;
 			case 6:		/* 都道府県名（漢字） */
-				ret = del_quote(&temp);
-				strcpy(data->kanji.perf, temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kanji.perf, p);
 				break;
 			case 7:		/* 市区町村名（漢字） */
-				ret = del_quote(&temp);
-				strcpy(data->kanji.city, temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kanji.city, p);
 				break;
 			case 8:		/* 町域名（漢字） */
-				ret = del_quote(&temp);
-				strcpy(data->kanji.town, temp);
+				ret = del_quote(&p);
+                if (ret < 0)
+                    return ret;
+				strcpy(data->kanji.town, p);
 				break;
 			default:
 				break;
-		}	
-		if (i < FIELD_NUM-2) 
-			temp = p+1;	
-	}
+        }
+        p = strtok(NULL, ",");
+        i++;
+    }
 
-	return ret;
+    /* 切り出したフィールド数が15でなければエラー */
+    if (i != 15) 
+        return -1;
+    else
+        return 0;
 }
 
